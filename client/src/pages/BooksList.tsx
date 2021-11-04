@@ -1,7 +1,7 @@
 import { Button, Spin } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getBooks, Book } from "../api/book";
+import { listBooks, Book } from "../api/book";
 import "./BooksList.scss";
 
 export const BooksList = () => {
@@ -14,7 +14,7 @@ export const BooksList = () => {
     (async () => {
       setLoading(true);
 
-      const newBooks = await getBooks(pageToLoad);
+      const newBooks = await listBooks(pageToLoad);
 
       setBooks(existingBooks => [...existingBooks, ...newBooks]);
       setLoading(false);

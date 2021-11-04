@@ -1,21 +1,34 @@
 import * as http from "../util/http";
 
-const url = "https://gutendex.com/books/";
+const url = "https://gutendex.com/books";
 
 export type Book = {
   id: number;
   title: string;
   image: string | null;
+  authors: Person[];
 };
 
-export const getBooks = async (page: number = 1) => {
+export const listBooks = async (page: number = 1): Promise<Book[]> => {
   const response = await http.getJson<GetBooksResponse>(url, { page });
 
   return response.results.map(b => ({
     id: b.id,
     title: b.title,
     image: b.formats["image/jpeg"] ?? null,
+    authors: b.authors,
   }));
+};
+
+export const getBook = async (id: number): Promise<Book> => {
+  const book = await http.getJson<BookItem>(`${url}/${id}`);
+
+  return {
+    id: book.id,
+    title: book.title,
+    image: book.formats["image/jpeg"] ?? null,
+    authors: book.authors,
+  };
 };
 
 type GetBooksResponse = {
