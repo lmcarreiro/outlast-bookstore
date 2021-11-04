@@ -8,6 +8,7 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(cors());
+app.use(express.json({ limit: "1mb" }));
 
 app.post("/api/saveFavorite/:id", saveFavorite);
 app.get("/api/checkFavorite/:id", checkFavorite);

@@ -1,10 +1,11 @@
-import { Col, Row, Image, Spin } from "antd";
+import { Col, Row, Image, Spin, Button } from "antd";
 import React from "react";
 import { useParams } from "react-router-dom";
+import { HeartFilled, HeartOutlined, LoadingOutlined } from "@ant-design/icons";
 
 import "./BookDetails.scss";
 import { getBook, Book } from "../api/book";
-import { checkFavorite } from "../api/favorite";
+import { checkFavorite, saveFavorite } from "../api/favorite";
 
 export const BookDetails = () => {
   const params = useParams<"id">();
@@ -20,8 +21,6 @@ export const BookDetails = () => {
 
   return (
     <div className="book-details-page">
-      {typeof favorite} ---
-      {JSON.stringify(favorite)}
       {book ? (
         <Row>
           <Col span={6}>{book.image ? <Image src={book.image} /> : <Image />}</Col>
@@ -35,6 +34,15 @@ export const BookDetails = () => {
                 </li>
               ))}
             </ul>
+            <Button
+              type={favorite ? "primary" : "ghost"}
+              icon={
+                typeof favorite === "undefined" ? <LoadingOutlined /> : favorite ? <HeartFilled /> : <HeartOutlined />
+              }
+              onClick={typeof favorite !== undefined ? () => saveFavorite(id, !favorite) : undefined}
+            >
+              Favorite
+            </Button>
           </Col>
         </Row>
       ) : (
