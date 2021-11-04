@@ -1,10 +1,18 @@
 import http from "http";
 import express from "express";
+import cors from "cors";
+
+import { checkFavorite, saveFavorite } from "./book";
 
 const app = express();
 const server = http.createServer(app);
 
-app.get("/api/test", (req, res) => {
+app.use(cors());
+
+app.post("/api/saveFavorite/:id", saveFavorite);
+app.get("/api/checkFavorite/:id", checkFavorite);
+
+app.get("/api/test", async (req, res) => {
   res.send({ test: "OK" });
 });
 
