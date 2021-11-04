@@ -1,0 +1,21 @@
+{
+  "name": "@outlast-bookstore/root",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "yarn install-client && yarn install-server",
+    "install-client": "cd client && yarn install",
+    "install-server": "cd server && yarn install",
+    "start": "concurrently -n client,server -c blue,green \"yarn start-client\" \"yarn start-server\"",
+    "start-client": "cd client && yarn start",
+    "start-server": "cd server && yarn start",
+    "build": "yarn build-client && yarn build-server",
+    "build-client": "cd client && yarn build",
+    "build-server": "cd server && yarn build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "prettier": "^2.4.1"
+  }
+}
