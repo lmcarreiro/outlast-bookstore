@@ -1,3 +1,9 @@
 .book-details-page {
   padding: 50px;
+
+  .ant-btn-primary {
+    svg {
+      color: red;
+    }
+  }
 }

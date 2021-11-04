@@ -2,8 +2,9 @@ import * as http from "../util/http";
 
 const url = "http://localhost:3030/api";
 
-export const saveFavorite = async (id: number, flag: boolean): Promise<void> => {
-  await http.postJson(`${url}/saveFavorite/${id}`, { flag });
+export const saveFavorite = async (id: number, flag: boolean): Promise<boolean> => {
+  const result = await http.postJson<{ success: boolean }>(`${url}/saveFavorite/${id}`, { flag });
+  return result.success;
 };
 
 export const checkFavorite = async (id: number): Promise<boolean> => {

@@ -19,6 +19,16 @@ export const BookDetails = () => {
     checkFavorite(id).then(setFavorite);
   }, [id]);
 
+  const handleFavoriteClick = React.useCallback(async () => {
+    if (typeof favorite === "undefined") return;
+
+    const result = await saveFavorite(id, !favorite);
+
+    if (result) {
+      setFavorite(!favorite);
+    }
+  }, [id, favorite]);
+
   return (
     <div className="book-details-page">
       {book ? (
@@ -39,7 +49,7 @@ export const BookDetails = () => {
               icon={
                 typeof favorite === "undefined" ? <LoadingOutlined /> : favorite ? <HeartFilled /> : <HeartOutlined />
               }
-              onClick={typeof favorite !== undefined ? () => saveFavorite(id, !favorite) : undefined}
+              onClick={handleFavoriteClick}
             >
               Favorite
             </Button>
