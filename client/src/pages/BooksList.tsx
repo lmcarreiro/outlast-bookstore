@@ -1,6 +1,6 @@
 import React from "react";
-import { Col, Row, Image } from "antd";
 import { getBooks, Book } from "../api/book";
+import "./BooksList.scss";
 
 export const BooksList = () => {
   const [pageToLoad, setPageToLoad] = React.useState(1);
@@ -11,12 +11,14 @@ export const BooksList = () => {
   }, [pageToLoad]);
 
   return (
-    <div>
+    <div className="books-list-page">
       {books.map(book => (
-        <Row key={book.id}>
-          <Col>{book.image && <Image src={book.image} />}</Col>
-          <Col>{book.title}</Col>
-        </Row>
+        <div key={book.id} className="book-item" onClick={() => {}}>
+          <div className="image">{book.image ? <img src={book.image} alt={book.title} /> : ""}</div>
+          <div className="title">
+            <h5>{book.title}</h5>
+          </div>
+        </div>
       ))}
     </div>
   );

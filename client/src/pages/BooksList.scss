@@ -1,0 +1,40 @@
+.books-list-page {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+
+  .book-item {
+    display: flex;
+    flex-direction: column;
+    width: 210px;
+    padding: 20px;
+
+    &:hover {
+      background: #ccc;
+      cursor: pointer;
+    }
+
+    .image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      //height: 100%;
+
+      img {
+        max-height: 180px;
+        max-width: 100%;
+      }
+    }
+
+    .title {
+      flex-shrink: 0;
+
+      h5 {
+        max-height: 50px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}
